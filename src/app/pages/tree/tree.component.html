@@ -1,0 +1,28 @@
+<div class="card-tree bg-white rounded-lg shadow-md p-6">
+  <span class="text-xl font-semibold">Tree</span>
+  <p-tree [value]="tree" selectionMode="checkbox" styleClass="w-full md:w-[30rem] card-tree"
+    [(selection)]="selectedFiles" />
+</div>
+
+<div class="card-tree bg-white rounded-lg shadow-md p-6 mt-5">
+  <span class="text-xl font-semibold">TreeTable</span>
+  <p-treetable [value]="treeTable" [columns]="cols" selectionMode="checkbox" [(selectionKeys)]="selectionKeys"
+    dataKey="key" [scrollable]="true" [tableStyle]="{ 'min-width': '50rem'  }" styleClass="card-tree">
+    <ng-template #header let-columns>
+      <tr>
+        <th *ngFor="let col of columns">
+          {{ col.header }}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-rowNode let-rowData="rowData" let-columns="columns">
+      <tr [ttRow]="rowNode" [ttSelectableRow]="rowNode">
+        <td *ngFor="let col of columns; let i = index">
+          <p-treetable-toggler [rowNode]="rowNode" *ngIf="i === 0" />
+          <p-treetable-checkbox [value]="rowNode" *ngIf="i === 0" />
+          {{ rowData[col.field] }}
+        </td>
+      </tr>
+    </ng-template>
+  </p-treetable>
+</div>

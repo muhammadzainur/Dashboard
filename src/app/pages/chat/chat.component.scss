@@ -1,0 +1,14 @@
+html,
+body {
+  background: #fff;
+  color: #222;
+  font-family: "Inter", sans-serif;
+}
+/* Remove inner scrollbars for PDF export */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

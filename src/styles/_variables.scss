@@ -1,0 +1,29 @@
+/* Light Theme */
+$color-bg-light: #ffffff;
+$color-text-light: #1f2937;
+$color-border-light: #d1d5db;
+$color-hover-light: #e5e7eb;
+$color-highlight-light: #3b82f6;
+
+/* Dark Theme */
+$color-bg-dark: #1b1833;
+$color-bg-drawer-dark: #07031a;
+$color-text-dark: #f3f4f6;
+$color-border-dark: #4b5563;
+$color-hover-dark: #2d2d2d;
+$color-button-dark: #1f2937;
+$color-button-hover-dark: #374151;
+$color-highlight-dark: #3b82f6;
+
+/* Shared */
+$color-icon-card-dark: #272343;
+
+// Variabel untuk definisi lebar
+$stock-chart-default: 384px; // 96rem
+$stock-chart-sidebar: 400px; // Lebar saat sidebar muncul
+$stock-chart-tablet: 320px; // 80rem
+
+// Variabel untuk breakpoint
+$breakpoint-desktop: 1280px; // XL breakpoint
+$breakpoint-laptop: 1024px; // LG breakpoint
+$breakpoint-tablet: 768px; // MD breakpoint

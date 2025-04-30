@@ -1,0 +1,138 @@
+<div class="card-chat min-h-screen flex bg-white" style="min-height:90vh;">
+  <!-- Sidebar Kontak -->
+  <aside class="card-chat w-80 flex-shrink-0 bg-white border-r border-gray-200 py-8 px-6">
+    <div class="mb-6">
+      <h2 class="text-2xl card-chat font-semibold mb-2 text-gray-900">Kontak</h2>
+      <!-- Search -->
+      <div class="relative">
+        <span class="absolute left-3 top-3 text-gray-400"><i class="fas fa-search"></i></span>
+        <input type="text" placeholder="Cari kontak..."
+          class="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-lg bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-300" />
+      </div>
+    </div>
+    <ul class="mt-4 space-y-2">
+      <!-- Sample Contacts -->
+      <li class="card-chat flex items-center p-2 rounded-lg transition-colors hover:bg-blue-50 cursor-pointer">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Elang"
+          class="w-10 h-10 rounded-full mr-3 border border-gray-200">
+        <div class="flex-1">
+          <div class="flex items-center">
+            <span class="card-chat font-medium text-gray-900 mr-2">Elang Pratama</span>
+            <!-- Online indicator -->
+            <span class="flex w-2.5 h-2.5 bg-green-400 rounded-full ml-auto"></span>
+          </div>
+          <span class="text-xs text-gray-400">Online</span>
+        </div>
+      </li>
+      <li class="card-chat flex items-center p-2 rounded-lg transition-colors hover:bg-blue-50 cursor-pointer">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Rina"
+          class="w-10 h-10 rounded-full mr-3 border border-gray-200">
+        <div class="flex-1">
+          <div class="flex items-center">
+            <span class="card-chat font-medium text-gray-900 mr-2">Rina Ayu</span>
+            <span class="flex w-2.5 h-2.5 bg-green-400 rounded-full ml-auto"></span>
+          </div>
+          <span class="text-xs text-gray-400">Online</span>
+        </div>
+      </li>
+      <li class="card-chat flex items-center p-2 rounded-lg transition-colors hover:bg-blue-50 cursor-pointer">
+        <img src="https://randomuser.me/api/portraits/men/56.jpg" alt="Rian"
+          class="w-10 h-10 rounded-full mr-3 border border-gray-200">
+        <div class="flex-1">
+          <div class="flex items-center">
+            <span class="card-chat font-medium text-gray-900 mr-2">Rian Ahmad</span>
+            <span class="flex w-2.5 h-2.5 bg-gray-300 rounded-full ml-auto"></span>
+          </div>
+          <span class="text-xs text-gray-400">Offline</span>
+        </div>
+      </li>
+      <li class="card-chat flex items-center p-2 rounded-lg transition-colors hover:bg-blue-50 cursor-pointer">
+        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Maya"
+          class="w-10 h-10 rounded-full mr-3 border border-gray-200">
+        <div class="flex-1">
+          <div class="flex items-center">
+            <span class="card-chat font-medium text-gray-900 mr-2">Maya Putri</span>
+            <span class="flex w-2.5 h-2.5 bg-green-400 rounded-full ml-auto"></span>
+          </div>
+          <span class="text-xs text-gray-400">Online</span>
+        </div>
+      </li>
+      <li class="card-chat flex items-center p-2 rounded-lg transition-colors hover:bg-blue-50 cursor-pointer">
+        <img src="https://randomuser.me/api/portraits/men/85.jpg" alt="Bagus"
+          class="w-10 h-10 rounded-full mr-3 border border-gray-200">
+        <div class="flex-1">
+          <div class="flex items-center">
+            <span class="card-chat font-medium text-gray-900 mr-2">Bagus Santoso</span>
+            <span class="flex w-2.5 h-2.5 bg-gray-300 rounded-full ml-auto"></span>
+          </div>
+          <span class="text-xs text-gray-400">Offline</span>
+        </div>
+      </li>
+    </ul>
+  </aside>
+  <!-- Main Chat Area -->
+  <main class="card-chat flex-1 min-h-screen flex flex-col bg-white">
+    <!-- Chat Header -->
+    <div class="flex items-center px-8 py-6 border-b border-gray-200">
+      <div class="flex items-center">
+        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Elang"
+          class="w-12 h-12 rounded-full border border-gray-200 mr-3">
+        <div>
+          <span class="card-chat block font-semibold text-gray-800">Elang Pratama</span>
+          <div class="flex items-center space-x-2">
+            <span class="w-2 h-2 bg-green-400 rounded-full"></span>
+            <span class="text-xs text-gray-400">Online</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Chat Body -->
+    <div class="card-chat flex-1 px-8 py-6 bg-white no-scrollbar" style="overflow: visible;">
+      <!-- Sample messages -->
+      <div class="flex flex-col space-y-6">
+        <div class="flex flex-col items-start">
+          <div class="max-w-lg px-5 py-3 rounded-2xl bg-blue-50 text-gray-900 text-base shadow">
+            Hai, apa kabar hari ini? 😊
+          </div>
+          <span class="text-xs text-gray-400 mt-1">09:01</span>
+        </div>
+        <div class="flex flex-col items-end">
+          <div class="max-w-lg px-5 py-3 rounded-2xl bg-blue-500 text-white text-base shadow">
+            Halo! Baik, terima kasih. Kamu sendiri bagaimana?
+          </div>
+          <span class="text-xs text-gray-400 mt-1">09:02</span>
+        </div>
+        <div class="flex flex-col items-start">
+          <div class="max-w-lg px-5 py-3 rounded-2xl bg-blue-50 text-gray-900 text-base shadow">
+            Aku juga baik. Ada rencana hari ini?
+          </div>
+          <span class="text-xs text-gray-400 mt-1">09:03</span>
+        </div>
+        <div class="flex flex-col items-end">
+          <div class="max-w-lg px-5 py-3 rounded-2xl bg-blue-500 text-white text-base shadow">
+            Rencananya mau kerja kelompok, kamu ikut?
+          </div>
+          <span class="text-xs text-gray-400 mt-1">09:05</span>
+        </div>
+        <div class="flex flex-col items-start">
+          <div class="max-w-lg px-5 py-3 rounded-2xl bg-blue-50 text-gray-900 text-base shadow">
+            Boleh, aku gabung nanti siang ya!
+          </div>
+          <span class="text-xs text-gray-400 mt-1">09:06</span>
+        </div>
+      </div>
+    </div>
+    <!-- Chat Input -->
+    <div class="card-chat px-8 py-5 border-t border-gray-200 bg-white">
+      <form class="flex items-center space-x-4">
+        <input type="text" placeholder="Ketik pesan..."
+          class="flex-1 py-3 px-4 rounded-lg border border-gray-300 bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-300" />
+        <button type="submit"
+          class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-blue-500 text-white hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-300"
+          title="Kirim">
+          <i class="pi pi-send text-xl"></i>
+        </button>
+      </form>
+    </div>
+  </main>
+</div>

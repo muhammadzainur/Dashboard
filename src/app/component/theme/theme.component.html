@@ -1,0 +1,30 @@
+<!-- Tombol Buka Drawer -->
+<button class="hover:bg-transparent px-3 py-2 rounded-md shadow-xl hover:bg-gray-100 focus:outline-none"
+  (click)="toggleDrawer()">
+  <i class="pi pi-cog dark:text-gray-200 text-lg"></i>
+</button>
+
+<!-- Drawer -->
+<p-drawer [(visible)]="visible" header="Theme Settings" [position]="'right'" [modal]="true" (onHide)="onCloseDrawer()">
+  <div class="p-4 w-64">
+    <!-- Text Color -->
+    <div class="mb-4">
+      <label class="block mb-2 font-medium">Text Color</label>
+      <div class="grid grid-cols-6 gap-2">
+        <div *ngFor="let color of textcolors" class="w-6 h-6 rounded-full cursor-pointer border-2"
+          [ngStyle]="{'background-color': color, 'border-color': textColor === color ? 'white' : 'transparent'}"
+          (click)="updateTextColor(color)">
+        </div>
+      </div>
+    </div>
+
+    <!-- Dark Mode -->
+    <div class="mb-4">
+      <label class="block mb-1 font-medium">Mode</label>
+      <p-selectButton [options]="modeOptions" [(ngModel)]="selectedMode" (ngModelChange)="toggleDarkMode()"
+        optionLabel="label" optionValue="value">
+      </p-selectButton>
+    </div>
+
+  </div>
+</p-drawer>

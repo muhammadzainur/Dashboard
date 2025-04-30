@@ -1,0 +1,26 @@
+html.light-mode {
+  background-color: #eef5fc !important;
+  color: #1f2937;
+
+  .p-card,
+  .p-drawer,
+  .p-select,
+  input,
+  select {
+    background-color: #fff !important;
+    color: #1f2937 !important;
+    border-color: #d1d5db !important;
+  }
+
+  .sidebar,
+  .navbar {
+    background-color: #fff !important;
+    color: #1f2937 !important;
+  }
+
+  .p-menu {
+    background-color: #fff !important;
+    color: #1f2937 !important;
+    border: none !important;
+  }
+}

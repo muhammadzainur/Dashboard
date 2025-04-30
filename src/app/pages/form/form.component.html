@@ -1,0 +1,115 @@
+<div class="flex flex-col md:flex-row gap-10 mx-auto px-4 md:px-2">
+  <!-- Kolom Kiri - berisi Vertical Form dan Vertical Grid -->
+  <div class="flex flex-col gap-5 w-3/6">
+    <!-- Vertical Form (sudah ada) -->
+    <div class="card-form bg-white rounded-lg shadow-md p-6">
+      <span class="text-xl font-semibold">Vertical Form</span>
+      <div class="flex flex-col">
+        <p-floatlabel class="mt-8">
+          <input id="username" class="w-full" pInputText [(ngModel)]="username" />
+          <label for="username">Username</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-floatlabel class="mt-10">
+          <input id="email" class="w-full" pInputText [(ngModel)]="email" />
+          <label for="email">Email</label>
+        </p-floatlabel>
+      </div>
+
+      <div class="flex flex-col">
+        <p-floatlabel class="mt-10">
+          <input id="age" class="w-full" pInputText [(ngModel)]="age" />
+          <label for="age">Age</label>
+        </p-floatlabel>
+      </div>
+    </div>
+
+    <!-- Vertical Grid (card baru yang disederhanakan) -->
+    <div class="card-form bg-white rounded-lg shadow-md p-6">
+      <span class="text-xl font-semibold">Vertical Grid</span>
+
+      <div class="grid grid-cols-2 gap-4 mt-4">
+        <div class="flex flex-col">
+          <label for="firstname" class="mb-2">First Name</label>
+          <input id="firstname" class="w-full" pInputText>
+        </div>
+        <div class="flex flex-col">
+          <label for="lastname" class="mb-2">Last Name</label>
+          <input id="lastname" class="w-full" pInputText>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flex flex-col w-3/5 gap-5">
+    <div class="card-form bg-white rounded-lg shadow-md p-6">
+      <span class="text-xl font-semibold">Horizontal Form</span>
+
+      <div class="flex flex-col gap-3 mt-3">
+        <div class="flex items-center">
+          <label for="username" class="w-1/5">Username</label>
+          <input id="username" class="w-4/5" pInputText>
+        </div>
+        <div class="flex items-center">
+          <label for="email" class="w-1/5">Email</label>
+          <input id="email" class="w-4/5" pInputText>
+        </div>
+      </div>
+    </div>
+
+    <!-- Inline Form -->
+    <div class="card-form bg-white rounded-lg shadow-md p-6">
+      <span class="text-xl font-semibold">Inline Form</span>
+
+      <div class="flex flex-wrap items-center gap-4 mt-3">
+        <input type="text" pInputText placeholder="Username">
+        <input type="email" pInputText placeholder="Email">
+        <p-button label="Submit" severity="info" />
+      </div>
+    </div>
+
+    <div class="card-form bg-white rounded-lg shadow-md p-6">
+      <span class="text-xl font-semibold">Help Me</span>
+      <div class="flex flex-col mt-3">
+        <input type="text" pInputText placeholder="Username">
+        <small class="text-slate-500">Enter your username to reset your password.</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card-form bg-white rounded-lg shadow-md p-6 mt-4">
+  <span class="text-xl font-semibold">Advanced</span>
+
+  <!-- Perbaikan pada bagian firstname dan lastname -->
+  <div class="flex flex-col md:flex-row gap-4 mt-3">
+    <div class="flex flex-col gap-2 w-full">
+      <label for="firstname">Firstname</label>
+      <input type="text" id="firstname" class="w-full" pInputText>
+    </div>
+    <div class="flex flex-col gap-2 w-full">
+      <label for="lastname">Lastname</label>
+      <input type="text" id="lastname" class="w-full" pInputText>
+    </div>
+  </div>
+
+  <!-- Perbaikan pada bagian address -->
+  <div class="flex flex-col gap-2 mt-3 w-full">
+    <label for="address">Address</label>
+    <textarea id="address" rows="4" class="w-full card-form p-2 border rounded-md"></textarea>
+  </div>
+
+  <div class="flex flex-col md:flex-row gap-4 mt-3">
+    <div class="flex flex-col gap-2 w-full">
+      <label for="state">State</label>
+      <p-select [options]="cities" [(ngModel)]="selectedCity" optionLabel="name" placeholder="Select a State"
+        class="w-full" />
+    </div>
+    <div class="flex flex-col gap-2 w-full">
+      <label for="country">Zip</label>
+      <input type="text" id="country" class="w-full" pInputText>
+    </div>
+  </div>
+</div>

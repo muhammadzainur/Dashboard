@@ -1,1 +1,6 @@
-/* You can add global styles to this file, and also import other style files */
+@use "styles/dark-theme";
+@use "styles/light-theme";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

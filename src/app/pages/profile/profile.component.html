@@ -1,0 +1,10 @@
+<div class="relative">
+  <button (click)="toggleDropdown()" class="flex items-center mr-4 focus:outline-none">
+    <img src="https://i.pravatar.cc/40" class="w-9 h-9 rounded-full" alt="Profile" />
+  </button>
+  <div *ngIf="dropdownOpen" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg z-30 card-profile">
+    <a href="#" class="block px-4 py-2 hover:bg-neutral-300">Profile</a>
+    <a href="#" class="block px-4 py-2 hover:bg-neutral-300">Settings</a>
+    <a href="#" class="block px-4 py-2 hover:bg-neutral-300 text-red-600">Logout</a>
+  </div>
+</div>

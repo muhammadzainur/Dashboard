@@ -1,0 +1,234 @@
+@use "./variables" as *;
+/* DARK MODE */
+html.dark-mode {
+  background-color: $color-bg-dark !important;
+  color: $color-text-dark;
+
+  .p-selectbutton {
+    background-color: transparent;
+    border: 1px solid #4b5563 !important;
+    border-radius: 0.5rem;
+    padding: 2px;
+
+    .p-togglebutton {
+      background-color: #07031a !important;
+      border: none !important;
+      box-shadow: none !important;
+    }
+  }
+
+  .p-drawer,
+  .p-select,
+  input,
+  select {
+    background-color: $color-bg-drawer-dark !important;
+    color: $color-text-dark !important;
+    border-color: $color-border-dark !important;
+  }
+
+  .p-card,
+  .navbar {
+    background-color: $color-bg-drawer-dark !important;
+    color: $color-text-dark !important;
+  }
+
+  .icon-card {
+    background-color: $color-icon-card-dark !important;
+    color: $color-text-dark !important;
+  }
+
+  .subtitle {
+    color: $color-text-dark !important;
+  }
+
+  .p-menu {
+    background-color: $color-bg-drawer-dark !important;
+    color: $color-text-dark !important;
+    border: none !important;
+  }
+
+  .p-menu-item .p-menuitem-link {
+    background-color: transparent !important;
+    color: $color-text-dark !important;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: $color-hover-dark !important;
+    }
+  }
+
+  .p-menuitem-icon,
+  .p-menuitem-active .p-menuitem-icon {
+    color: $color-text-dark !important;
+  }
+
+  .p-selectbutton {
+    background-color: transparent !important;
+
+    .p-button {
+      background-color: $color-button-dark !important;
+      color: $color-text-dark !important;
+      border: 1px solid $color-button-hover-dark !important;
+
+      &:hover {
+        background-color: $color-button-hover-dark !important;
+      }
+
+      &.p-highlight {
+        background-color: $color-highlight-dark !important;
+        color: #fff !important;
+        border-color: $color-highlight-dark !important;
+      }
+    }
+  }
+
+  .chart-card {
+    background-color: $color-bg-drawer-dark !important;
+    color: $color-text-dark !important;
+    transition: all 0.3s ease;
+
+    h3 {
+      margin-bottom: 1rem;
+      font-weight: 600;
+      font-size: 1.25rem;
+      color: white;
+    }
+
+    .revenue-chart {
+      flex: 1;
+      min-width: 0;
+      max-width: calc(100% - #{$stock-chart-default});
+
+      // Saat sidebar muncul (viewport lebih kecil)
+      @media (max-width: $breakpoint-desktop) {
+        max-width: calc(100% - #{$stock-chart-sidebar});
+      }
+
+      // Viewport laptop/smaller desktop
+      @media (max-width: $breakpoint-laptop) {
+        max-width: calc(100% - #{$stock-chart-tablet});
+      }
+
+      // Mobile view
+      @media (max-width: $breakpoint-tablet) {
+        max-width: 100%;
+      }
+    }
+  }
+
+  .card-table {
+    background-color: $color-bg-drawer-dark !important;
+    color: $color-text-dark !important;
+
+    .p-datatable-header {
+      background-color: $color-bg-drawer-dark !important;
+      color: $color-text-dark !important;
+    }
+
+    tr th {
+      background-color: $color-bg-drawer-dark !important;
+      color: $color-text-dark !important;
+    }
+
+    tr td {
+      background-color: $color-bg-drawer-dark !important;
+      color: $color-text-dark !important;
+    }
+
+    ::-webkit-scrollbar {
+      height: 8px; /* untuk horizontal scroll */
+      background-color: #1e1e2f; /* background scrollbar track */
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: #f1efec; /* warna thumb / scroll bar */
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #f1efec; /* warna saat hover */
+    }
+  }
+
+  .card-profile {
+    background-color: $color-bg-drawer-dark !important;
+  }
+
+  .card-button {
+    background-color: $color-bg-drawer-dark !important;
+  }
+
+  .custom-contrast {
+    background-color: white !important;
+    border-color: white !important;
+    color: black !important;
+
+    &:hover {
+      background-color: #f0f0f0 !important; /* warna saat hover */
+      border-color: #f0f0f0 !important;
+      color: black !important;
+    }
+  }
+
+  .custom-contrast-outlined {
+    background-color: transparent !important;
+    border-color: white !important;
+    color: white !important;
+  }
+
+  .card-chat {
+    background-color: $color-bg-drawer-dark !important;
+    color: #fff;
+  }
+
+  .card-form {
+    background-color: $color-bg-drawer-dark !important;
+    color: #fff;
+    border-color: #4b5563 !important;
+  }
+
+  .card-tree,
+  th,
+  td {
+    background-color: $color-bg-drawer-dark !important;
+  }
+
+  .card-overlay {
+    background-color: $color-bg-drawer-dark !important;
+  }
+
+  .p-dialog-header,
+  .p-dialog-content {
+    background-color: $color-bg-drawer-dark !important;
+    color: #f1efec !important;
+  }
+  .p-dialog {
+    border: #dbdbdb 1px solid !important;
+    overflow: hidden !important;
+  }
+
+  .custom-team-popover .p-popover-content {
+    background-color: #1a1a1a !important;
+    color: #fff !important;
+    border-radius: 8px;
+    border: 1px solid #4b5563 !important;
+  }
+
+  .custom-team-popover .p-popover-content ul li {
+    color: #fff;
+
+    &:hover {
+      background-color: #4a4947;
+    }
+  }
+
+  .custom-confirm-popup {
+    background-color: #1a1a1a !important;
+    overflow: hidden !important;
+  }
+
+  .custom-confirm-popup .block {
+    color: #fff !important;
+  }
+}

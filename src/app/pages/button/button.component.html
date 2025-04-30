@@ -1,0 +1,126 @@
+<div class="flex flex-col md:flex-row gap-6">
+  <div class="card-button bg-white rounded-lg shadow-md p-6 w-1/2">
+    <span class="text-xl font-semibold">Default</span>
+    <div class="mt-3">
+      <p-button label="Submit" severity="success" class="mr-3" />
+      <p-button severity="success" label="Link" class="mr-3 p-button-link" />
+      <p-button severity="success" label="Disabled" disabled="true" />
+    </div>
+  </div>
+
+  <div class="card-button bg-white rounded-lg shadow-md p-6 w-1/2 flex flex-col">
+    <span class="text-xl font-semibold mb-4">Icons</span>
+    <div class="flex flex-wrap gap-4">
+      <p-button icon="pi pi-home" aria-label="Home" />
+      <p-button label="Profile" icon="pi pi-user" />
+      <p-button label="Save" icon="pi pi-check" iconPos="right" />
+      <p-button label="Search" icon="pi pi-search" iconPos="top" />
+      <p-button label="Update" icon="pi pi-refresh" iconPos="bottom" />
+    </div>
+  </div>
+</div>
+
+
+<div class="flex flex-col md:flex-row gap-6">
+  <div class="card-button bg-white rounded-lg shadow-md p-6 w-1/2 mt-4">
+    <span class="text-xl font-semibold">Raised</span>
+    <div class="mt-3 flex flex-wrap gap-3">
+      <p-button label="Primary" [raised]="true" />
+      <p-button label="Secondary" [raised]="true" severity="secondary" />
+      <p-button label="Success" [raised]="true" severity="success" />
+      <p-button label="Info" [raised]="true" severity="info" />
+      <p-button label="Warn" [raised]="true" severity="warn" />
+      <p-button label="Help" [raised]="true" severity="help" />
+      <p-button label="Danger" [raised]="true" severity="danger" />
+      <button type="button" class="p-button p-component p-button-contrast custom-contrast">
+        <span class="p-button-label">Contrast</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="card-button bg-white rounded-lg shadow-md p-6 w-1/2 flex flex-col mt-4">
+    <span class="text-xl font-semibold mb-4">Icons rounded</span>
+    <div class="flex flex-wrap gap-4">
+      <p-button icon="pi pi-check" [rounded]="true" />
+      <p-button icon="pi pi-bookmark" [rounded]="true" severity="secondary" />
+      <p-button icon="pi pi-search" [rounded]="true" severity="success" />
+      <p-button icon="pi pi-user" [rounded]="true" severity="info" />
+      <p-button icon="pi pi-bell" [rounded]="true" severity="warn" />
+      <p-button icon="pi pi-heart" [rounded]="true" severity="help" />
+      <p-button icon="pi pi-times" [rounded]="true" severity="danger" />
+    </div>
+  </div>
+</div>
+
+<div class="flex flex-col md:flex-row gap-6">
+  <div class="card-button bg-white rounded-lg shadow-md p-6 w-1/2 mt-4">
+    <span class="text-xl font-semibold">Rounded</span>
+    <div class="mt-3 flex flex-wrap gap-3">
+      <p-button label="Primary" [rounded]="true" />
+      <p-button label="Secondary" [rounded]="true" severity="secondary" />
+      <p-button label="Success" [rounded]="true" severity="success" />
+      <p-button label="Info" [rounded]="true" severity="info" />
+      <p-button label="Warn" [rounded]="true" severity="warn" />
+      <p-button label="Help" [rounded]="true" severity="help" />
+      <p-button label="Danger" [rounded]="true" severity="danger" />
+      <button type="button" class="p-button p-component p-button-contrast custom-contrast p-button-rounded">
+        <span class="p-button-label">Contrast</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="card-button bg-white rounded-lg shadow-md p-6 w-1/2 flex flex-col mt-4">
+    <span class="text-xl font-semibold mb-4">Icons Outlined</span>
+    <div class="flex flex-wrap gap-4">
+      <p-button icon="pi pi-check" variant="outlined" [rounded]="true" />
+      <p-button icon="pi pi-bookmark" variant="outlined" [rounded]="true" severity="secondary" />
+      <p-button icon="pi pi-search" variant="outlined" [rounded]="true" severity="success" />
+      <p-button icon="pi pi-user" variant="outlined" [rounded]="true" severity="info" />
+      <p-button icon="pi pi-bell" variant="outlined" [rounded]="true" severity="warn" />
+      <p-button icon="pi pi-heart" variant="outlined" [rounded]="true" severity="help" />
+      <p-button icon="pi pi-times" variant="outlined" [rounded]="true" severity="danger" />
+    </div>
+  </div>
+</div>
+
+<div class="flex flex-col md:flex-row gap-6">
+  <div class="card-button bg-white rounded-lg shadow-md p-6 w-1/2 mt-4">
+    <span class="text-xl font-semibold">Outlined</span>
+    <div class="mt-3 flex flex-wrap gap-3">
+      <p-button label="Primary" variant="outlined" />
+      <p-button label="Secondary" variant="outlined" severity="secondary" />
+      <p-button label="Success" variant="outlined" severity="success" />
+      <p-button label="Info" variant="outlined" severity="info" />
+      <p-button label="Warn" variant="outlined" severity="warn" />
+      <p-button label="Help" variant="outlined" severity="help" />
+      <p-button label="Danger" variant="outlined" severity="danger" />
+      <button type="button" class="p-button p-component p-button-contrast custom-contrast-outlined p-button-outlined">
+        <span class="p-button-label">Contrast</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="card-button bg-white rounded-lg shadow-md p-6 w-1/2 flex flex-col mt-4">
+    <span class="text-xl font-semibold mb-4">Image</span>
+    <div class="flex flex-wrap gap-4">
+      <p-button [outlined]="true">
+        <img src="https://primefaces.org/cdn/primeng/images/logo.svg" alt="logo" style="width: 1.5rem;">
+      </p-button>
+      <p-button>
+        <img src="https://primefaces.org/cdn/primeng/images/logo.svg" alt="logo" style="width: 1.5rem;">
+        <span>PrimeNG</span>
+      </p-button>
+    </div>
+  </div>
+</div>
+
+<div class="card-button bg-white rounded-lg shadow-md p-6 w-1/2 mt-4">
+  <span class="text-xl font-semibold">Button Group</span>
+  <div class="mt-3">
+    <p-buttongroup class="">
+      <p-button label="Save" icon="pi pi-check" />
+      <p-button label="Delete" icon="pi pi-trash" />
+      <p-button label="Cancel" icon="pi pi-times" />
+    </p-buttongroup>
+  </div>
+</div>
