@@ -10,31 +10,55 @@ import { ChartModule } from 'primeng/chart';
 import { CardModule } from 'primeng/card';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ComponentService } from '../../service/component.service';
-import { RatingModule } from 'primeng/rating';
-import { TagModule } from 'primeng/tag';
 import { ButtonModule } from 'primeng/button';
-import { TableModule } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
 import { Product } from '../../variabel/product';
 import { TextColorService } from '../../color/text-color.service';
+import { Router } from '@angular/router';
+import { ProductComponent } from './product/product.component';
 
+interface Status {
+  name: string;
+}
 @Component({
   selector: 'app-home',
   imports: [
     ChartModule,
     CardModule,
     CommonModule,
-    RatingModule,
-    TagModule,
     ButtonModule,
-    TableModule,
     FormsModule,
+    ProductComponent,
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
   textColor: string = '#000';
+  expandedRows: { [key: string]: boolean } = {};
+
+  // Tambahkan properti untuk dialog detail produk
+  displayProductDialog: boolean = false;
+  selectedProduct: Product | null = null;
+
+  visible: boolean = false;
+
+  cities: Status[] | undefined;
+
+  selectedStatus: Status | undefined;
+
+  showDialog() {
+    this.visible = true;
+  }
+
+  pagedProducts() {
+    return this.products
+      ? this.products.slice(this.first, this.first + this.rows)
+      : [];
+  }
+
+  first: number = 0;
+  rows: number = 10;
 
   cardItems = [
     {
@@ -90,7 +114,8 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private cd: ChangeDetectorRef,
-    private textColorService: TextColorService
+    private textColorService: TextColorService,
+    private router: Router
   ) {}
 
   themeEffect = effect(() => {
@@ -105,7 +130,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.initCharts();
-    this.componentService.getProductsMini().then((data) => {
+    this.componentService.getProducts().then((data) => {
       this.products = data;
     }),
       this.textColorService.textColor$.subscribe((color) => {
@@ -113,6 +138,16 @@ export class HomeComponent implements OnInit {
         this.textColor = color;
         this.cd.markForCheck(); // Pastikan change detection berjalan
       });
+    // this.cities = [
+    //   { name: 'INSTOCK' },
+    //   { name: 'OUTOFSTOCK' },
+    //   { name: 'LOWSTOCK' },
+    // ];
+    this.cities = [
+      { name: 'INSTOCK' },
+      { name: 'OUTOFSTOCK' },
+      { name: 'LOWSTOCK' },
+    ];
   }
 
   initCharts() {
@@ -220,22 +255,24 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  getSeverity(
-    status: string
-  ): 'success' | 'secondary' | 'info' | 'warn' | 'danger' | 'contrast' {
+  getSeverity(status: string) {
     switch (status) {
-      case 'in-stock':
+      case 'INSTOCK':
         return 'success';
-      case 'out-of-stock':
-        return 'danger';
-      case 'low-stock':
+      case 'LOWSTOCK':
         return 'warn';
-      default:
-        return 'secondary';
+      case 'OUTOFSTOCK':
+        return 'danger';
     }
+    return null;
   }
 
   changeTextColor(color: string): void {
     this.textColorService.setTextColor(color);
+  }
+
+  // Tambahkan method untuk melihat detail produk
+  viewProductDetails(product: Product): void {
+    this.router.navigate(['/product', product.id]);
   }
 }

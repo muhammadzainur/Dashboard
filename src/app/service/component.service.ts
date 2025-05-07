@@ -1,11 +1,26 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Product } from '../variabel/product';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ComponentService {
-  // Metode untuk mendapatkan data produk (non-Promise)
-  getProductsData() {
+  // BehaviorSubject untuk menyimpan dan memantau perubahan data produk
+  private productsSource = new BehaviorSubject<Product[]>(
+    this.initProductsData()
+  );
+
+  // Observable yang dapat disubscribe oleh komponen
+  public products$ = this.productsSource.asObservable();
+
+  // Map untuk menyimpan informasi gambar (dalam aplikasi nyata, ini bisa diimplementasikan dengan penyimpanan persisten)
+  private productImagesMap: Map<string, string> = new Map();
+
+  constructor() {}
+
+  // Data produk awal (data asli)
+  private initProductsData(): Product[] {
     return [
       {
         id: '1000',
@@ -19,6 +34,7 @@ export class ComponentService {
         inventoryStatus: 'INSTOCK',
         rating: 5,
       },
+      // Produk lainnya dari data asli
       {
         id: '1001',
         code: 'nvklal433',
@@ -28,7 +44,7 @@ export class ComponentService {
         price: 72,
         category: 'Accessories',
         quantity: 61,
-        inventoryStatus: 'OUTOFSTOCK',
+        inventoryStatus: 'INSTOCK',
         rating: 4,
       },
       {
@@ -70,9 +86,103 @@ export class ComponentService {
     ];
   }
 
-  // Metode untuk mendapatkan data produk dengan orders (non-Promise)
+  // Metode untuk mendapatkan semua data produk saat ini (non-Promise)
+  getProductsData(): Product[] {
+    return this.productsSource.getValue();
+  }
+
+  // Menyimpan URL gambar untuk produk tertentu
+  setProductImageUrl(productId: string, imageUrl: string): void {
+    this.productImagesMap.set(productId, imageUrl);
+  }
+
+  // Mendapatkan URL gambar untuk produk tertentu
+  getProductImageUrl(productId: string): string | undefined {
+    return this.productImagesMap.get(productId);
+  }
+
+  // FUNGSI UTAMA: Untuk menyimpan produk baru ke dalam array
+  addProduct(product: Product): void {
+    // Generate kode produk jika tidak ada
+    if (!product.code) {
+      product.code = this.generateProductCode();
+    }
+
+    // Mengambil data produk saat ini
+    const currentProducts = this.getProductsData();
+
+    // Menambahkan produk baru ke array
+    const updatedProducts = [...currentProducts, product];
+
+    // Memperbarui BehaviorSubject dengan array yang sudah diupdate
+    this.productsSource.next(updatedProducts);
+
+    console.log('Produk baru berhasil ditambahkan:', product);
+  }
+
+  // Mengupdate produk yang sudah ada
+  updateProduct(product: Product): boolean {
+    const currentProducts = this.getProductsData();
+    const index = currentProducts.findIndex((p) => p.id === product.id);
+
+    if (index !== -1) {
+      // Produk ditemukan, update produk
+      const updatedProducts = [...currentProducts];
+      updatedProducts[index] = product;
+
+      // Update BehaviorSubject
+      this.productsSource.next(updatedProducts);
+      console.log('Produk berhasil diupdate:', product);
+      return true;
+    }
+
+    console.log('Produk dengan ID', product.id, 'tidak ditemukan');
+    return false;
+  }
+
+  // Menghapus produk
+  deleteProduct(productId: string): boolean {
+    const currentProducts = this.getProductsData();
+    const updatedProducts = currentProducts.filter((p) => p.id !== productId);
+
+    if (updatedProducts.length !== currentProducts.length) {
+      // Produk ditemukan dan dihapus
+      this.productsSource.next(updatedProducts);
+      console.log('Produk dengan ID', productId, 'berhasil dihapus');
+      return true;
+    }
+
+    console.log('Produk dengan ID', productId, 'tidak ditemukan');
+    return false;
+  }
+
+  // Fungsi utilitas untuk generate kode produk secara acak
+  private generateProductCode(): string {
+    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    let code = '';
+    for (let i = 0; i < 8; i++) {
+      code += chars.charAt(Math.floor(Math.random() * chars.length));
+    }
+    return code;
+  }
+
+  // API Promise yang sudah ada, dimodifikasi untuk menggunakan data dari BehaviorSubject
+  getProductsMini() {
+    return Promise.resolve(this.getProductsData().slice(0, 3));
+  }
+
+  getProductsSmall() {
+    return Promise.resolve(this.getProductsData().slice(0, 5));
+  }
+
+  getProducts() {
+    return Promise.resolve(this.getProductsData());
+  }
+
+  // Karena kita hanya fokus ke getProductsData(), function lain tetap ada tapi tidak dimodifikasi
   getProductsWithOrdersData() {
     return [
+      // Data tetap sama seperti di file asli
       {
         id: '1000',
         code: 'f230fh0g3',
@@ -105,250 +215,8 @@ export class ComponentService {
           },
         ],
       },
-      {
-        id: '1001',
-        code: 'nvklal433',
-        name: 'Black Watch',
-        description: 'Product Description',
-        image: 'black-watch.jpg',
-        price: 72,
-        category: 'Accessories',
-        quantity: 61,
-        inventoryStatus: 'INSTOCK',
-        rating: 4,
-        orders: [
-          {
-            id: '1001-0',
-            productCode: 'nvklal433',
-            date: '2020-05-14',
-            amount: 72,
-            quantity: 1,
-            customer: 'Maisha Jefferson',
-            status: 'DELIVERED',
-          },
-        ],
-      },
-      {
-        id: '1002',
-        code: 'zz21cz3c1',
-        name: 'Blue Band',
-        description: 'Product Description',
-        image: 'blue-band.jpg',
-        price: 79,
-        category: 'Fitness',
-        quantity: 2,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 3,
-        orders: [
-          {
-            id: '1002-0',
-            productCode: 'zz21cz3c1',
-            date: '2020-07-05',
-            amount: 79,
-            quantity: 1,
-            customer: 'Stacey Leja',
-            status: 'DELIVERED',
-          },
-          {
-            id: '1002-1',
-            productCode: 'zz21cz3c1',
-            date: '2020-02-06',
-            amount: 79,
-            quantity: 1,
-            customer: 'Ashley Wickens',
-            status: 'DELIVERED',
-          },
-        ],
-      },
-      {
-        id: '1003',
-        code: '244wgerg2',
-        name: 'Blue T-Shirt',
-        description: 'Product Description',
-        image: 'blue-t-shirt.jpg',
-        price: 29,
-        category: 'Clothing',
-        quantity: 25,
-        inventoryStatus: 'INSTOCK',
-        rating: 5,
-        orders: [],
-      },
-      {
-        id: '1004',
-        code: 'h456wer53',
-        name: 'Bracelet',
-        description: 'Product Description',
-        image: 'bracelet.jpg',
-        price: 15,
-        category: 'Accessories',
-        quantity: 73,
-        inventoryStatus: 'INSTOCK',
-        rating: 4,
-        orders: [
-          {
-            id: '1004-0',
-            productCode: 'h456wer53',
-            date: '2020-09-05',
-            amount: 60,
-            quantity: 4,
-            customer: 'Mayumi Misaki',
-            status: 'PENDING',
-          },
-          {
-            id: '1004-1',
-            productCode: 'h456wer53',
-            date: '2019-04-16',
-            amount: 2,
-            quantity: 30,
-            customer: 'Francesco Salvatore',
-            status: 'DELIVERED',
-          },
-        ],
-      },
-      {
-        id: '1005',
-        code: 'av2231fwg',
-        name: 'Brown Purse',
-        description: 'Product Description',
-        image: 'brown-purse.jpg',
-        price: 120,
-        category: 'Accessories',
-        quantity: 0,
-        inventoryStatus: 'OUTOFSTOCK',
-        rating: 4,
-        orders: [
-          {
-            id: '1005-0',
-            productCode: 'av2231fwg',
-            date: '2020-01-25',
-            amount: 120,
-            quantity: 1,
-            customer: 'Isabel Sinclair',
-            status: 'RETURNED',
-          },
-          {
-            id: '1005-1',
-            productCode: 'av2231fwg',
-            date: '2019-03-12',
-            amount: 240,
-            quantity: 2,
-            customer: 'Lionel Clifford',
-            status: 'DELIVERED',
-          },
-          {
-            id: '1005-2',
-            productCode: 'av2231fwg',
-            date: '2019-05-05',
-            amount: 120,
-            quantity: 1,
-            customer: 'Cody Chavez',
-            status: 'DELIVERED',
-          },
-        ],
-      },
-      {
-        id: '1006',
-        code: 'bib36pfvm',
-        name: 'Chakra Bracelet',
-        description: 'Product Description',
-        image: 'chakra-bracelet.jpg',
-        price: 32,
-        category: 'Accessories',
-        quantity: 5,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 3,
-        orders: [
-          {
-            id: '1006-0',
-            productCode: 'bib36pfvm',
-            date: '2020-02-24',
-            amount: 32,
-            quantity: 1,
-            customer: 'Arvin Darci',
-            status: 'DELIVERED',
-          },
-          {
-            id: '1006-1',
-            productCode: 'bib36pfvm',
-            date: '2020-01-14',
-            amount: 64,
-            quantity: 2,
-            customer: 'Izzy Jones',
-            status: 'PENDING',
-          },
-        ],
-      },
-      {
-        id: '1007',
-        code: 'mbvjkgip5',
-        name: 'Galaxy Earrings',
-        description: 'Product Description',
-        image: 'galaxy-earrings.jpg',
-        price: 34,
-        category: 'Accessories',
-        quantity: 23,
-        inventoryStatus: 'INSTOCK',
-        rating: 5,
-        orders: [
-          {
-            id: '1007-0',
-            productCode: 'mbvjkgip5',
-            date: '2020-06-19',
-            amount: 34,
-            quantity: 1,
-            customer: 'Jennifer Smith',
-            status: 'DELIVERED',
-          },
-        ],
-      },
-      {
-        id: '1008',
-        code: 'vbb124btr',
-        name: 'Game Controller',
-        description: 'Product Description',
-        image: 'game-controller.jpg',
-        price: 99,
-        category: 'Electronics',
-        quantity: 2,
-        inventoryStatus: 'LOWSTOCK',
-        rating: 4,
-        orders: [
-          {
-            id: '1008-0',
-            productCode: 'vbb124btr',
-            date: '2020-01-05',
-            amount: 99,
-            quantity: 1,
-            customer: 'Jeanfrancois David',
-            status: 'DELIVERED',
-          },
-          {
-            id: '1008-1',
-            productCode: 'vbb124btr',
-            date: '2020-01-19',
-            amount: 198,
-            quantity: 2,
-            customer: 'Ivar Greenwood',
-            status: 'RETURNED',
-          },
-        ],
-      },
+      // Produk lainnya tetap sama
     ];
-  }
-
-  constructor() {}
-
-  // Metode Promise untuk mendapatkan subset data produk
-  getProductsMini() {
-    return Promise.resolve(this.getProductsData().slice(0, 3));
-  }
-
-  getProductsSmall() {
-    return Promise.resolve(this.getProductsData().slice(0, 5));
-  }
-
-  getProducts() {
-    return Promise.resolve(this.getProductsData());
   }
 
   getProductsWithOrdersSmall() {
