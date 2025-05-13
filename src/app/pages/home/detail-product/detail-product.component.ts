@@ -8,6 +8,7 @@ import { RatingModule } from 'primeng/rating';
 import { ActivatedRoute } from '@angular/router';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { CartService } from '../../../service/cart/cart.service';
 
 @Component({
   selector: 'app-detail-product',
@@ -32,14 +33,15 @@ export class DetailProductComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private componentService: ComponentService,
-    private router: Router
+    private router: Router,
+    private cartService: CartService
   ) {}
 
   ngOnInit() {
-    this.route.paramMap.subscribe((params) => {
-      const productId = params.get('id');
-      if (productId) {
-        this.loadProductDetails(productId);
+    const productId = this.route.snapshot.paramMap.get('id');
+    this.componentService.getProductsData().forEach((product) => {
+      if (product.id === productId) {
+        this.product = product;
       }
     });
   }
@@ -63,6 +65,11 @@ export class DetailProductComponent implements OnInit {
   }
 
   goBack() {
+    this.router.navigate(['/']);
+  }
+
+  addToCart() {
+    this.cartService.addToCart(this.product, this.quantity);
     this.router.navigate(['/']);
   }
 }

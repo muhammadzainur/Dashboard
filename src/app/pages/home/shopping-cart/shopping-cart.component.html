@@ -1,0 +1,45 @@
+<div class="flex justify-center min-h-screen">
+  <div class="flex flex-col w-full bg-white p-4 shadow rounded-lg justify-between">
+    <h2 class="text-2xl font-semibold mb-4">Shopping Cart</h2>
+
+    <!-- Daftar Cart Items -->
+    <div>
+      <div *ngFor="let item of cartItems" class="flex items-center border rounded-lg p-4 mb-4 shadow-sm">
+        <!-- Gambar -->
+        <img [src]="'https://primefaces.org/cdn/primeng/images/demo/product/' + item.image" alt="{{ item.name }}"
+          class="w-24 h-24 object-cover rounded-md mr-4" />
+
+        <!-- Detail -->
+        <div class="flex-1">
+          <div class="flex justify-between items-start">
+            <h2 class="font-semibold text-lg">{{ item.name }}</h2>
+            <div class="text-right font-bold text-black">${{ item.price.toFixed(2) }}</div>
+          </div>
+
+          <!-- Kontrol Quantity -->
+          <div class="flex items-center mt-3 space-x-2">
+            <button class="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
+              (click)="decreaseQuantity(item)">−</button>
+            <input type="number" [(ngModel)]="item.quantity" min="1"
+              class="w-12 text-center border border-gray-300 rounded" />
+            <button class="w-8 h-8 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
+              (click)="increaseQuantity(item)">+</button>
+
+            <!-- Tombol Hapus -->
+            <button class="ml-auto text-red-500 hover:text-red-700" (click)="removeItem(item)" title="Remove item">
+              <i class="pi pi-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Total Harga di kanan bawah -->
+    <div class="text-right mt-auto pt-4 border-t">
+      <div class="text-lg font-semibold">
+        Total: <span class="text-green-600">${{ totalPrice.toFixed(2) }}</span>
+      </div>
+    </div>
+
+  </div>
+</div>

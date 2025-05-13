@@ -6,6 +6,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { ThemeComponent } from './component/theme/theme.component';
 import { RouterModule } from '@angular/router';
 import { TextColorService } from './color/text-color.service';
+import { CartService } from './service/cart/cart.service';
+import { Router } from '@angular/router';
 
 interface MenuItem {
   label: string;
@@ -29,6 +31,7 @@ interface MenuItem {
 })
 export class AppComponent implements OnInit {
   sidebarVisible: boolean = false;
+  cartItemCount = 0;
   textColor: string = '#000';
 
   componentItems: MenuItem[] = [
@@ -52,7 +55,11 @@ export class AppComponent implements OnInit {
 
   menuItems: any[] = [];
 
-  constructor(private textColorService: TextColorService) {}
+  constructor(
+    private textColorService: TextColorService,
+    private cartService: CartService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.menuItems = [
@@ -108,6 +115,14 @@ export class AppComponent implements OnInit {
     this.textColorService.textColor$.subscribe((color) => {
       this.textColor = color;
     });
+
+    this.cartService.totalQuantity$.subscribe((total) => {
+      this.cartItemCount = total;
+    });
+
+    this.cartService.totalQuantity$.subscribe((count) => {
+      this.cartItemCount = count;
+    });
   }
 
   toggleSidebar() {
@@ -116,5 +131,9 @@ export class AppComponent implements OnInit {
 
   changeTextColor(color: string): void {
     this.textColorService.setTextColor(color);
+  }
+
+  goToCart() {
+    this.router.navigate(['/shopping-cart']);
   }
 }

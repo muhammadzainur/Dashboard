@@ -34,7 +34,6 @@ export class ComponentService {
         inventoryStatus: 'INSTOCK',
         rating: 5,
       },
-      // Produk lainnya dari data asli
       {
         id: '1001',
         code: 'nvklal433',
@@ -77,6 +76,18 @@ export class ComponentService {
         name: 'Bracelet',
         description: 'Product Description',
         image: 'bracelet.jpg',
+        price: 15,
+        category: 'Accessories',
+        quantity: 73,
+        inventoryStatus: 'INSTOCK',
+        rating: 4,
+      },
+      {
+        id: '1005',
+        code: 'h456wer53',
+        name: 'test',
+        description: 'Product Description',
+        image: 'image-profile.jpg',
         price: 15,
         category: 'Accessories',
         quantity: 73,

@@ -155,12 +155,11 @@ export class ProductComponent {
     }
   }
 
-  // Method untuk melihat detail produk
   viewProductDetails(product: Product) {
+    console.log('Navigating to product details:', product);
     this.router.navigate(['/product', product.id]);
   }
 
-  // Method untuk menangani pemilihan file
   onFileSelected(event: any) {
     this.selectedFile = event.target.files[0];
 
@@ -195,10 +194,7 @@ export class ProductComponent {
     if (imageInfo) {
       return imageInfo.url;
     }
-
-    // Jika gambar tidak ditemukan di Map, mungkin ini adalah gambar yang baru saja ditambahkan
-    // di sesi sebelumnya dan belum ada di Map. Gunakan gambar placeholder sebagai gantinya.
-    return 'assets/placeholder-image.png';
+    return 'assets/image-profile';
   }
 
   // Method untuk menyimpan produk baru

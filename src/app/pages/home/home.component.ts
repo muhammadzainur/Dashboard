@@ -10,55 +10,19 @@ import { ChartModule } from 'primeng/chart';
 import { CardModule } from 'primeng/card';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ComponentService } from '../../service/component.service';
-import { ButtonModule } from 'primeng/button';
-import { FormsModule } from '@angular/forms';
 import { Product } from '../../variabel/product';
 import { TextColorService } from '../../color/text-color.service';
 import { Router } from '@angular/router';
 import { ProductComponent } from './product/product.component';
 
-interface Status {
-  name: string;
-}
 @Component({
   selector: 'app-home',
-  imports: [
-    ChartModule,
-    CardModule,
-    CommonModule,
-    ButtonModule,
-    FormsModule,
-    ProductComponent,
-  ],
+  imports: [ChartModule, CardModule, CommonModule, ProductComponent],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
 export class HomeComponent implements OnInit {
   textColor: string = '#000';
-  expandedRows: { [key: string]: boolean } = {};
-
-  // Tambahkan properti untuk dialog detail produk
-  displayProductDialog: boolean = false;
-  selectedProduct: Product | null = null;
-
-  visible: boolean = false;
-
-  cities: Status[] | undefined;
-
-  selectedStatus: Status | undefined;
-
-  showDialog() {
-    this.visible = true;
-  }
-
-  pagedProducts() {
-    return this.products
-      ? this.products.slice(this.first, this.first + this.rows)
-      : [];
-  }
-
-  first: number = 0;
-  rows: number = 10;
 
   cardItems = [
     {
@@ -112,10 +76,11 @@ export class HomeComponent implements OnInit {
   platformId = inject(PLATFORM_ID);
   componentService = inject(ComponentService);
 
+  products!: Product[];
+
   constructor(
     private cd: ChangeDetectorRef,
-    private textColorService: TextColorService,
-    private router: Router
+    private textColorService: TextColorService
   ) {}
 
   themeEffect = effect(() => {
@@ -126,28 +91,15 @@ export class HomeComponent implements OnInit {
     }
   });
 
-  products!: Product[];
-
   ngOnInit(): void {
     this.initCharts();
     this.componentService.getProducts().then((data) => {
       this.products = data;
-    }),
-      this.textColorService.textColor$.subscribe((color) => {
-        console.log('Home receiving new text color:', color);
-        this.textColor = color;
-        this.cd.markForCheck(); // Pastikan change detection berjalan
-      });
-    // this.cities = [
-    //   { name: 'INSTOCK' },
-    //   { name: 'OUTOFSTOCK' },
-    //   { name: 'LOWSTOCK' },
-    // ];
-    this.cities = [
-      { name: 'INSTOCK' },
-      { name: 'OUTOFSTOCK' },
-      { name: 'LOWSTOCK' },
-    ];
+    });
+    this.textColorService.textColor$.subscribe((color) => {
+      this.textColor = color;
+      this.cd.markForCheck();
+    });
   }
 
   initCharts() {
@@ -161,7 +113,6 @@ export class HomeComponent implements OnInit {
         '--p-content-border-color'
       );
 
-      // Revenue (Bar Chart)
       this.revenueData = {
         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
         datasets: [
@@ -218,7 +169,6 @@ export class HomeComponent implements OnInit {
         },
       };
 
-      // Stock (Pie Chart)
       this.stockData = {
         labels: ['Electronic', 'Eyeglass', 'Shoe'],
         datasets: [
@@ -253,26 +203,5 @@ export class HomeComponent implements OnInit {
 
       this.cd.markForCheck();
     }
-  }
-
-  getSeverity(status: string) {
-    switch (status) {
-      case 'INSTOCK':
-        return 'success';
-      case 'LOWSTOCK':
-        return 'warn';
-      case 'OUTOFSTOCK':
-        return 'danger';
-    }
-    return null;
-  }
-
-  changeTextColor(color: string): void {
-    this.textColorService.setTextColor(color);
-  }
-
-  // Tambahkan method untuk melihat detail produk
-  viewProductDetails(product: Product): void {
-    this.router.navigate(['/product', product.id]);
   }
 }
