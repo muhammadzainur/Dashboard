@@ -136,6 +136,21 @@ html.dark-mode {
       color: $color-text-dark !important;
     }
 
+    .p-paginator {
+      background-color: $color-bg-drawer-dark !important;
+      color: $color-text-dark !important;
+    }
+
+    .p-select-list {
+      background-color: $color-bg-drawer-dark !important;
+      border: none !important;
+    }
+
+    .p-select-overlay {
+      border: 1px solid #4b5563 !important;
+      border-radius: 0.2rem !important;
+    }
+
     ::-webkit-scrollbar {
       height: 8px; /* untuk horizontal scroll */
       background-color: #1e1e2f; /* background scrollbar track */
@@ -231,6 +246,12 @@ html.dark-mode {
   .custom-confirm-popup .block {
     color: #fff !important;
   }
-  
-  
+
+  .card-detail {
+    background-color: $color-bg-drawer-dark !important;
+  }
+
+  .card-shopping {
+    background-color: $color-bg-drawer-dark !important;
+  }
 }
